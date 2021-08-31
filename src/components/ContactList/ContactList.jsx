@@ -32,7 +32,7 @@ export default function ContactList() {
                     
                     <StyledListItemText primary={name} secondary={number} />
                         
-                    <StyledIconButton edge="end" aria-label="edit" onClick={() => dispatch(phoneBookOperations.deleteContact(id))}>
+                    <StyledIconButton edge="end" aria-label="edit" /*onClick={() => dispatch(phoneBookOperations.deleteContact(id))}*/>
                        <EditIcon color="primary" fontSize="medium" />
                     </StyledIconButton>
                     
