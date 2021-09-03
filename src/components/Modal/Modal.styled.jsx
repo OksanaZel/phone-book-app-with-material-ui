@@ -18,4 +18,3 @@ export const StyledIconButton = styled(IconButton)`
   top: 8px;
   right: 8px;
 `
-

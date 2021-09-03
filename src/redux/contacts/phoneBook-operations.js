@@ -22,6 +22,17 @@ export const addContact = createAsyncThunk(
     }
 });
 
+export const editContact = createAsyncThunk(
+    "contacts/editContact", async ({id, ...contact}, { rejectWithValue }) => {
+        try {
+        const data = await apiService.editContact({ id, ...contact });
+            console.log(data);
+        return data;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+});
+
 export const deleteContact = createAsyncThunk(
     "contacts/deleteContact", async (id, { rejectWithValue }) => {
         try {

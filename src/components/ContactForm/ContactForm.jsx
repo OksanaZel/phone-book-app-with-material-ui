@@ -4,7 +4,7 @@ import { phoneBookOperations, phoneBookSelectors } from "redux/contacts";
 import * as Yup from 'yup';
 import { useFormik } from "formik";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { StyledTitle, StyledButton, StyledFormContainer, StyledFormWrapper, StyledTextField, StyledForm } from "./ContactForm.styled";
+import { StyledTitle, StyledButton, StyledFormContainer, StyledFormWrapper, StyledTextField, StyledForm, StyledBox } from "./ContactForm.styled";
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -31,7 +31,8 @@ export default function ContactForm() {
          resetForm()
      },
    });
-  const { handleSubmit, handleChange, isSubmitting, values, touched, errors } = formik;
+  
+  const { resetForm, handleSubmit, handleChange, isSubmitting, values, touched, errors } = formik;
   return (
     <StyledFormContainer>
       <CssBaseline />
@@ -45,7 +46,6 @@ export default function ContactForm() {
 
           <StyledTextField
           fullWidth
-          id="name"
           name="name"
           type="text"
           label="Name"
@@ -57,7 +57,6 @@ export default function ContactForm() {
 
           <StyledTextField
           fullWidth
-          id="number"
           name="number"
           type="text"
           label="Number"
@@ -65,8 +64,12 @@ export default function ContactForm() {
           onChange={handleChange}
           error={touched.number && Boolean(errors.number)}
           helperText={touched.number && errors.number}
-        />
-          <StyledButton variant="contained" type="submit" disabled={isSubmitting}>Add contact</StyledButton>
+          />
+
+          <StyledBox>
+            <StyledButton variant="contained" type="button" onClick={resetForm}>Reset form</StyledButton>
+            <StyledButton variant="contained" type="submit" disabled={isSubmitting}>Add contact</StyledButton>
+          </StyledBox>
 
         </StyledForm>
         </StyledFormWrapper>

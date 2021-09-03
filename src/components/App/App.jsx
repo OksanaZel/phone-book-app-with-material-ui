@@ -11,7 +11,6 @@ import RegisterView from "views/RegisterView";
 import LoginView from "views/LoginView";
 import ContactsView from "views/ContactsView";
 
-
 function App() {
   const dispatch = useDispatch();
   const isRefreshingCurrentUser = useSelector(authSelectors.getIsRefreshingCurrentUser);

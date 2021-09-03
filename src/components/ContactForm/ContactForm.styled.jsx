@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
@@ -10,12 +11,17 @@ font-weight: 400;
 line-height: 32px;
 `;
 
+export const StyledBox = styled(Box)`
+display: flex;
+align-items: center;
+  justify-content: space-between;
+`;
+
 export const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto;
-  min-width: 200px;
+  min-width: 150px;
   padding: 2px 32px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;

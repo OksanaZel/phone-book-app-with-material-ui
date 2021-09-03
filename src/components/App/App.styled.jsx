@@ -23,6 +23,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 `;
+
 export const MainPageImg = styled.img`
 
 `;

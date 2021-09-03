@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { ContactListContainer, ContactListItem, StyledAvatar, StyledListItemText, StyledIconButton, StyledTitle} from "./ContactList.styled";
@@ -32,9 +32,9 @@ export default function ContactList() {
                     
                     <StyledListItemText primary={name} secondary={number} />
                         
-                    <StyledIconButton edge="end" aria-label="edit" /*onClick={() => dispatch(phoneBookOperations.deleteContact(id))}*/>
+                    {/* <StyledIconButton edge="end" aria-label="edit" onClick={() => dispatch(phoneBookOperations.deleteContact(id))}>
                        <EditIcon color="primary" fontSize="medium" />
-                    </StyledIconButton>
+                    </StyledIconButton> */}
                     
                     <StyledIconButton edge="end" aria-label="delete" onClick={() => dispatch(phoneBookOperations.deleteContact(id))}>
                         <DeleteIcon color="primary" fontSize="medium" />
