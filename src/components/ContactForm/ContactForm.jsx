@@ -9,37 +9,54 @@ import { StyledTitle, StyledButton, StyledFormContainer, StyledFormWrapper, Styl
 export default function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(phoneBookSelectors.getContacts);
+  const currentContact = useSelector(phoneBookSelectors.getCurrentContact);
+  const contactValues = useSelector(phoneBookSelectors.getInitialValues);
+
+  const initialValues = currentContact !== "" ?
+    { ...contactValues} :
+    { name: "", number: "" };
 
    const formik = useFormik({
-     initialValues: {
-       name: '',
-       number: '',
-     },
+     initialValues,
      validationSchema: Yup.object({
        name: Yup.string()
          .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
            'Name can only consist of letters, apostrophes, dashes and spaces.')
-         .notOneOf(contacts.map(contact => contact.name), "This contact is already exist in your list")
+         .notOneOf(contacts.filter(contact => contact.id !== currentContact)
+           .map(contact => contact.name),
+           "This contact is already exist in your list")
          .required('Required'),
        number: Yup.string()
          .matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, 'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +')
+         .notOneOf(contacts.filter(contact => contact.id !== currentContact)
+           .map(contact => contact.number),
+           "This contact is already exist in your list")
          .required('Required'),
      }),
      onSubmit: (values, { setSubmitting, resetForm }) => {
-       dispatch(phoneBookOperations.addContact({ name: values.name, number: values.number })),
+       dispatch(currentContact === "" ?
+         phoneBookOperations.addContact({ ...values }) :
+         phoneBookOperations.editContact({...values })
+         ),
          setSubmitting(false),
-         resetForm()
+         resetForm({
+           values: {
+             name: "",
+             number: "",
+           }
+         })
      },
    });
   
   const { resetForm, handleSubmit, handleChange, isSubmitting, values, touched, errors } = formik;
+
   return (
     <StyledFormContainer>
       <CssBaseline />
       <StyledFormWrapper>
 
         <StyledTitle>
-          Add contact
+          {currentContact !== "" ? "Edit contact" : " Add contact"}
         </StyledTitle>
 
         <StyledForm onSubmit={handleSubmit}>
@@ -67,8 +84,10 @@ export default function ContactForm() {
           />
 
           <StyledBox>
-            <StyledButton variant="contained" type="button" onClick={resetForm}>Reset form</StyledButton>
-            <StyledButton variant="contained" type="submit" disabled={isSubmitting}>Add contact</StyledButton>
+            <StyledButton variant="contained" type="submit" onClick={resetForm}>Reset form</StyledButton>
+            <StyledButton variant="contained" type="submit" disabled={isSubmitting}>
+              {currentContact !== "" ? "Edit contact" : " Add contact"}
+            </StyledButton>
           </StyledBox>
 
         </StyledForm>

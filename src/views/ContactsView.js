@@ -1,16 +1,16 @@
 import React from "react";
-import { StyledBox, StyledContainer } from "../components/App/App.styled";
+import { StyledContainer } from "../components/App/App.styled";
 import ContactList from "../components/ContactList";
-import Filter from "../components/Filter";
-import BasicModal from "../components/Modal/";
+// import Filter from "../components/Filter";
+// import BasicModal from "../components/Modal/";
 
 function ContactsView() {
       return (
         <StyledContainer>
-          <StyledBox>
+          {/* <StyledBox>
           <BasicModal/>
           <Filter />
-          </StyledBox>
+          </StyledBox> */}
           <ContactList />
           </StyledContainer>
   )

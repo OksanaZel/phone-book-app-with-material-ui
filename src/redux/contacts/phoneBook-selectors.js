@@ -11,6 +11,11 @@ export const getVisibleContacts = createSelector([getContacts, getFilter],
         return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
     })
 
+export const getInitialValues = createSelector([getContacts, getCurrentContact],
+    (contacts, currentContact) => {
+        return contacts.find(contact => contact.id === currentContact);
+})
+
 //     export const getVisibleContacts = (state) => {
 //     const contacts = getContacts(state);
 //     const filter = getFilter(state);
